@@ -10,10 +10,10 @@ struct Task{
 };
 
 void add_task(Queue<Task> &processed,Task t){
-    
+
     Queue<Task> aux;
     aux.enqueue(t);
-    
+
     while(!processed.isEmpty()){
         aux.enqueue(processed.dequeue());
     }
@@ -26,7 +26,7 @@ bool pop_task(Queue<Task> &processed, Task &t){
         return 0;
     }
     t = processed.dequeue();
-    
+
     return 1;
 }
 void print_task(Task t){
@@ -41,7 +41,7 @@ bool check_duplicates(Queue<Task> waiting, Queue<Task> processed, int id){
         Task t = processed.dequeue();
         if(t.id == id) return 1;
     }
-    
+
     return 0;
 }
 
@@ -58,23 +58,23 @@ void add_option(Queue<Task> &waiting,Queue<Task> &processed){
     Task t;
     cout << "Enter ID:";
     cin >> t.id;
-    
+
     if(check_duplicates(waiting,processed,t.id)){
         cout << "ID:" << t.id << " already exists in the system!" << endl;
         return;
     }
-    
+
     cout << "Enter description:";
     cin >> t.description;
-    
+
     cout << "Enter Priority:";
     cin >> t.priority;
-    
+
     if(t.priority < 1 || t.priority > 5){
         cout << "Priority value out of range [1,5]"<< endl;
         return;
     }
-    
+
     waiting.enqueue(t);
     cout << "Task succesfully added!"<< endl;
 }
@@ -131,7 +131,7 @@ void process_k(Queue<Task> &waiting, Queue<Task> &processed){
             cout << "No more tasks" << endl;
             break;
         }
-        
+
         Task t = waiting.dequeue();
         add_task(processed,t);
         cout << "Processed:" << endl;
@@ -141,7 +141,7 @@ void process_k(Queue<Task> &waiting, Queue<Task> &processed){
 void search_task(Queue<Task> &waiting, Queue<Task> &processed){
     int id;
     cin >> id;
-    
+
     if(check_duplicates(waiting,processed,id)){
         cout << "Task exists!" << endl;
     }
@@ -212,6 +212,5 @@ int main()
                 display_stats(waiting,processed,undo_count);
                 break;
         }
-        
     }
 }
