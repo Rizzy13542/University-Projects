@@ -4,11 +4,28 @@
 
 ### Used headers
 
-- ##### Graph.h
+- ##### No used headers, I used the cpp file from the lap to modify the already existent graph code.
 
-### Status
+### Notes
+The navigation utilizes an extended custom Graph implementation made with an adjacency matrix representation. Nodes represent city areas (identified by string labels), and edges hold specific weight data for robot navigation.
 
-Problem 1 is handled separately.
+The system evaluates routes using an optimized DFS backtracking strategy to locate ideal path.
+
+Each road edge stores:
+```cpp
+int time;    // Travel time required
+int risk;    // Risk/danger factor score
+int energy;  // Battery consumption requirement
+```
+
+### Methods
+```cpp
+int getNodeIndex(string name); // Maps alphanumeric location names to internal graph matrix indexes
+void dfsUndirected(int x);     // Disregards edge orientation to assess network-wide connectivity status
+void dfsDirected(int x);       // Traverses specific directions to verify complete zone reachability
+void findPaths(int u, int target, int maxRisk, int remEnergy, int currTime, int currEnergy, int depth); // Recursively maps paths satisfying risk limitations
+PathResult getBestPath(int start, int target, int maxRisk, int autonomy); // Controls structure resets and initializes optimal route scanning
+```
 
 ## Problem 2 - The Royal Chronicle of POLITEHNICA
 
